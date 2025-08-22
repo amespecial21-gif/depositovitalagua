@@ -141,55 +141,86 @@ document.addEventListener('DOMContentLoaded', function () {
           format: [largura, 140]
         });
 
+        const margem = 5;
+        const larguraTexto = largura - 2 * margem;
+        const tamanhoFonteTitulo = 10; // Títulos menores
+        const tamanhoFonteTexto = 8;  // Texto do usuário menor
+        const alturaLinha = 7;        // Espaçamento maior entre linhas
+
+        // Cabeçalho
         doc.setFont('helvetica', 'bold');
-        doc.setFontSize(13);
-        doc.text('PEDIDO VITAL ÁGUA', 5, y);
+        doc.setFontSize(10);
+        doc.text('VITAL ÁGUA', largura / 2, y, { align: 'center' });
+        y += 8;
+        doc.setFontSize(8);
+        doc.text('Água é Vida, Água é Vital!', largura / 2, y, { align: 'center' });
         y += 8;
 
+        // Nome
         doc.setFont('helvetica', 'bold');
-        doc.text('Nome:', 5, y);
-        y += 6;
+        doc.setFontSize(tamanhoFonteTitulo);
+        doc.text('Nome:', margem, y);
+        y += alturaLinha;
         doc.setFont('helvetica', 'normal');
-        doc.text(name, 5, y);
-        y += 6;
+        doc.setFontSize(tamanhoFonteTexto);
+        const nomeQuebrado = doc.splitTextToSize(name, larguraTexto);
+        doc.text(nomeQuebrado, margem, y);
+        y += nomeQuebrado.length * alturaLinha;
 
+        // Endereço
         doc.setFont('helvetica', 'bold');
-        doc.text('Endereço:', 5, y);
-        y += 6;
+        doc.setFontSize(tamanhoFonteTitulo);
+        doc.text('Endereço:', margem, y);
+        y += alturaLinha;
         doc.setFont('helvetica', 'normal');
-        doc.text(address, 5, y);
-        y += 6;
+        doc.setFontSize(tamanhoFonteTexto);
+        const enderecoQuebrado = doc.splitTextToSize(address, larguraTexto);
+        doc.text(enderecoQuebrado, margem, y);
+        y += enderecoQuebrado.length * alturaLinha;
 
+        // Observação
         doc.setFont('helvetica', 'bold');
-        doc.text('Observação:', 5, y);
-        y += 6;
+        doc.setFontSize(tamanhoFonteTitulo);
+        doc.text('Observação:', margem, y);
+        y += alturaLinha;
         doc.setFont('helvetica', 'normal');
-        doc.text(obs ? obs : '-', 5, y);
-        y += 8;
+        doc.setFontSize(tamanhoFonteTexto);
+        const obsQuebrado = doc.splitTextToSize(obs ? obs : '-', larguraTexto);
+        doc.text(obsQuebrado, margem, y);
+        y += obsQuebrado.length * alturaLinha;
 
+        // Itens do pedido
         doc.setFont('helvetica', 'bold');
-        doc.text('Itens do pedido:', 5, y);
-        y += 6;
+        doc.setFontSize(tamanhoFonteTitulo);
+        doc.text('Itens do pedido:', margem, y);
+        y += alturaLinha;
 
         cart.forEach(item => {
           const optionText = item.option.split(' - R$')[0];
           const entregaOuRetirada = item.delivery === 'entrega' ? 'com entrega' : 'retirada no local';
           doc.setFont('helvetica', 'normal');
-          doc.text(item.name, 5, y); y += 5;
-          doc.text(optionText, 5, y); y += 5;
-          doc.text(`Quantidade: ${item.quantity}`, 5, y); y += 5;
-          doc.text(entregaOuRetirada, 5, y); y += 6;
+          doc.setFontSize(tamanhoFonteTexto);
+          const itemNome = doc.splitTextToSize(item.name, larguraTexto);
+          doc.text(itemNome, margem, y);
+          y += itemNome.length * alturaLinha;
+          const itemOpcao = doc.splitTextToSize(optionText, larguraTexto);
+          doc.text(itemOpcao, margem, y);
+          y += itemOpcao.length * alturaLinha;
+          doc.text(`Quantidade: ${item.quantity}`, margem, y);
+          y += alturaLinha;
+          doc.text(entregaOuRetirada, margem, y);
+          y += alturaLinha;
         });
 
+        // Total
         const total = cart.reduce((acc, item) => acc + item.totalPrice, 0);
         doc.setFont('helvetica', 'bold');
-        doc.text(`TOTAL:`, 5, y);
+        doc.setFontSize(tamanhoFonteTitulo);
+        doc.text(`TOTAL:`, margem, y);
         doc.setFont('helvetica', 'normal');
-        doc.text(`R$ ${total.toFixed(2).replace('.', ',')}`, 28, y);
-        y += 8;
-
-        doc.setFont('helvetica', 'normal');
-        doc.text('Obrigado pela preferência!', 5, y);
+        doc.setFontSize(tamanhoFonteTexto);
+        doc.text(`R$ ${total.toFixed(2).replace('.', ',')}`, largura / 2, y);
+        y += alturaLinha + 2;
 
         doc.save('pedido-vitalagua.pdf');
       }
@@ -284,4 +315,5 @@ window.verHistorico = function() {
       document.getElementById('tabelaHistorico').innerHTML = html;
     });
 }
+
 
