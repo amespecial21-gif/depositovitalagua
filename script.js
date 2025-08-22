@@ -154,6 +154,13 @@ document.addEventListener('DOMContentLoaded', function () {
         y += 6;
 
         doc.setFont('helvetica', 'bold');
+        doc.text('Endereço:', 5, y);
+        y += 6;
+        doc.setFont('helvetica', 'normal');
+        doc.text(address, 5, y);
+        y += 6;
+
+        doc.setFont('helvetica', 'bold');
         doc.text('Observação:', 5, y);
         y += 6;
         doc.setFont('helvetica', 'normal');
@@ -277,3 +284,4 @@ window.verHistorico = function() {
       document.getElementById('tabelaHistorico').innerHTML = html;
     });
 }
+
