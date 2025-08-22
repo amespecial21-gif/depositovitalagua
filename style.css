@@ -1,0 +1,384 @@
+/* Base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: #f4f4f4;
+  color: #333;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+html, body {
+  height: 100%;
+}
+
+/* Cabeçalho */
+header {
+  background: #075c9f;
+  color: #fff;
+  text-align: center;
+  padding: 20px 0;
+  font-size: 24px;
+}
+
+/* Lista de produtos com scroll horizontal */
+.products-container {
+  padding: 0 10px;
+}
+
+.scroll-horizontal {
+  display: flex;
+  overflow-x: auto;
+  gap: 20px;
+  padding: 20px 10px 24px;
+  scroll-snap-type: x proximity;
+}
+
+.scroll-horizontal > .product-card {
+  scroll-snap-align: start;
+}
+
+.scroll-horizontal::-webkit-scrollbar {
+  height: 8px;
+}
+
+.scroll-horizontal::-webkit-scrollbar-thumb {
+  background: #bb825b;
+  border-radius: 4px;
+}
+
+.scroll-horizontal::-webkit-scrollbar-track {
+  background: #eaeaea;
+}
+
+/* Cards de produtos */
+.product-card {
+  flex: 0 0 260px;
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  text-align: center;
+  transition: transform 0.3s;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+}
+
+.product-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  object-fit: cover;
+}
+
+.product-card h2 {
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: #557570;
+}
+
+select, .quantity, input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background: #fff;
+}
+
+/* Botões */
+button.add-btn, #checkoutBtn {
+  background: #bb825b;
+  color: #fff;
+  border: none;
+  padding: 12px;
+  width: 100%;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.25s ease;
+}
+
+button.add-btn:hover, #checkoutBtn:hover {
+  background: #a2543d;
+  transform: scale(1.03);
+}
+
+button.add-btn:active {
+  animation: pulse 0.28s;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+/* Modal do carrinho */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(0,0,0,0.6);
+}
+
+.modal-content {
+  background: #fff;
+  margin: 8% auto;
+  padding: 22px;
+  border-radius: 16px;
+  width: 92%;
+  max-width: 420px;
+  position: relative;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.25);
+  transform: translateY(-40px);
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.modal.show .modal-content {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 16px;
+  font-size: 28px;
+  cursor: pointer;
+  color: #bb825b;
+}
+
+.close:hover {
+  color: #a2543d;
+}
+
+#cart-items {
+  list-style: none;
+  margin: 12px 0 10px;
+  max-height: 220px;
+  overflow: auto;
+}
+
+#cart-items li {
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+}
+
+.total {
+  font-weight: bold;
+  margin-top: 6px;
+}
+
+/* Aviso WhatsApp */
+.aviso {
+  background: #fff3cd;
+  color: #856404;
+  border: 1.5px solid #ffeeba;
+  border-radius: 7px;
+  padding: 10px 14px;
+  margin: 10px 0 16px 0;
+  font-weight: bold;
+  font-size: 1.05em;
+  box-shadow: 0 2px 8px rgba(255, 193, 7, 0.08);
+  text-align: center;
+  animation: aviso-pulse 1.2s infinite alternate;
+}
+
+@keyframes aviso-pulse {
+  0% { box-shadow: 0 2px 8px rgba(255, 193, 7, 0.08); }
+  100% { box-shadow: 0 0 16px 4px rgba(255, 193, 7, 0.18); }
+}
+
+/* Responsivo */
+@media (min-width: 900px) {
+  .products-container {
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+}
+
+/* Main */
+main {
+  flex: 1;
+}
+
+/* Carrossel horizontal */
+.carousel {
+  width: 100%;
+  max-width: 900px;
+  margin: 30px auto;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.5s;
+  width: 100%;
+}
+
+.carousel-track img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  background: #fff;
+  flex-shrink: 0;
+  flex-grow: 0;
+  max-width: 900px;
+  min-width: 100%;
+  border-radius: 0;
+  display: block;
+  margin: 0 auto;
+}
+
+.carousel-dots {
+  text-align: center;
+  margin-top: 12px;
+}
+
+.carousel-dots .dot {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin: 0 6px;
+  background: #ccc;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.5s;
+}
+
+.carousel-dots .dot.active {
+  background: #004e8f;
+}
+
+/* Rodapé */
+footer {
+  font-size: 18px;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  padding: 18px 0 8px 0;
+  background: #075c9f; /* mesma cor do cabeçalho */
+  color: #ffffff;
+  line-height: 1.8;
+}
+
+footer a {
+  color: #0051ff;
+  font-size: inherit;
+  font-family: inherit;
+  margin: 0 8px;
+  transition: color 0.3s;
+  text-decoration: none;
+  vertical-align: middle;
+}
+
+footer a:hover {
+  color: #000000;
+}
+.btn-historico {
+  background: #075c9f;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 24px;
+  font-size: 1em;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 16px 0 0 16px;
+  display: inline-block;   /* Garante que não ocupe toda a largura */
+  width: auto;             /* Garante largura automática */
+  box-sizing: border-box;  /* Garante que padding não estique o botão */
+}
+
+/* Modal do histórico */
+#historicoModal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  overflow: auto;
+  background: rgba(0,0,0,0.5);
+}
+#historicoModal .modal-content {
+  opacity: 1 !important;
+  transform: none !important;
+  margin: 60px auto;
+  background: #fff;
+  padding: 30px 24px 24px 24px;
+  border-radius: 12px;
+  max-width: 700px;
+  width: 95%;
+  position: relative;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+  z-index: 10000;
+}
+#historicoModal input[type="password"] {
+  width: 60%;
+  padding: 10px;
+  margin: 10px 0 16px 0;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1.1em;
+}
+#historicoModal button {
+  background: #075c9f;
+  color: #fff;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 1.1em;
+  cursor: pointer;
+  margin-left: 10px;
+}
+#historicoModal button:hover {
+  background: #003e6b;
+}
+#historicoModal .close {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  cursor: pointer;
+  font-size: 32px;
+  color: #bb825b;
+  z-index: 2;
+}
+#historicoModal .close:hover {
+  color: #a2543d;
+}
+
+.btn-historico {
+  background: #075c9f;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 24px;
+  font-size: 1em;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 16px 0 0 16px;
+  display: inline-block;
+  width: auto !important;      /* <-- força largura automática */
+  max-width: 300px;            /* <-- limite opcional para não crescer demais */
+  box-sizing: border-box;
+}

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vital Àgua</title>
+  <meta name="description" content="Vital Água - entrega rápida de água mineral e gás em Ananindeua. Qualidade e confiança desde 2014.">
+  <link rel="stylesheet" href="style.css"/>
+  <!-- jsPDF para gerar PDF -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+  <header>
+    <div style="display:flex; align-items:center; justify-content:center; gap:24px;">
+      <img src="Logo/logo da vital.png" alt="Logo Vital Água" style="height: 120px; width:auto; display:block;">
+      <div>
+        <h1>VITAL ÁGUA</h1>
+        <h2>Água é Vida, Água é Vital!</h2>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Produtos -->
+    <div class="products-container scroll-horizontal">
+      <!-- Produto 1 -->
+      <div class="product-card">
+        <img src="Imagem dos produtos/gama lopes.jpg" alt="Água 20L"/>
+        <h2>Água Gama Lopes 20L</h2>
+        <select class="option-select">
+          <option value="Sem Vasilhame - R$ 35.00">Sem Vasilhame - R$ 35,00</option>
+          <option value="Com Vasilhame - R$ 7.00">Com Vasilhame - R$ 7,00</option>
+        </select>
+        <select class="delivery-select">
+          <option value="entrega" data-extra="1.50">Entregar em casa (+R$ 1,50)</option>
+          <option value="retirada" data-extra="0">Retirar no local (sem taxa)</option>
+        </select>
+        <span>Quantidade</span>
+        <input type="number" class="quantity" value="1" min="1"/>
+        <button class="add-btn">Adicionar ao carrinho</button>
+      </div>
+
+      <!-- Produto 2 -->
+      <div class="product-card">
+        <img src="Imagem dos produtos/nossaagua.jpg" alt="Água 20L"/>
+        <h2>Água Nossa Água 20L</h2>
+        <select class="option-select">
+          <option value="Sem Vasilhame - R$ 35.00">Sem Vasilhame - R$ 35,00</option>
+          <option value="Com Vasilhame - R$ 8.00">Com Vasilhame - R$ 8,00</option>
+        </select>
+        <select class="delivery-select">
+          <option value="entrega" data-extra="2.00">Entregar em casa (+R$ 2,00)</option>
+          <option value="retirada" data-extra="0">Retirar no local (sem taxa)</option>
+        </select>
+        <span>Quantidade</span>
+        <input type="number" class="quantity" value="1" min="1"/>
+        <button class="add-btn">Adicionar ao carrinho</button>
+      </div>
+
+      <!-- Produto 3 -->
+      <div class="product-card">
+        <img src="Imagem dos produtos/bellagua.jpg" alt="Água 20L"/>
+        <h2>Água Bellágua 20L</h2>
+        <select class="option-select">
+          <option value="Sem Vasilhame - R$ 35.00">Sem Vasilhame - R$ 35,00</option>
+          <option value="Com Vasilhame - R$ 11.00">Com Vasilhame - R$ 11,00</option>
+        </select>
+        <select class="delivery-select">
+          <option value="entrega" data-extra="1.50">Entregar em casa (+R$ 1,50)</option>
+          <option value="retirada" data-extra="0">Retirar no local (sem taxa)</option>
+        </select>
+        <span>Quantidade</span>
+        <input type="number" class="quantity" value="1" min="1"/>
+        <button class="add-btn">Adicionar ao carrinho</button>
+      </div>
+
+      <!-- Produto 4 -->
+      <div class="product-card">
+        <img src="Imagem dos produtos/gas.jpg" alt="Gás 13kg"/>
+        <h2>Gás paragás 13kg</h2>
+        <select class="option-select">
+          <option value="Sem botijão - R$ 330.00">Sem botijão - R$ 330,00</option>
+          <option value="Com botijão - R$ 116.00">Com botijão - R$ 116,00</option>
+        </select>
+        <select class="delivery-select">
+          <option value="entrega" data-extra="9">Entregar em casa (+R$ 9,00)</option>
+          <option value="retirada" data-extra="0">Retirar no local (sem taxa)</option>
+        </select>
+        <span>Quantidade</span>
+        <input type="number" class="quantity" value="1" min="1"/>
+        <button class="add-btn">Adicionar ao carrinho</button>
+      </div>
+    </div>
+
+    <!-- Modal Carrinho -->
+    <div id="cartModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Carrinho</h2>
+        <ul id="cart-items"></ul>
+        <p class="total">Total: R$ <span id="cart-total">0,00</span></p>
+
+        <h3>Seus dados</h3>
+        <input type="text" id="nameInput" placeholder="nome" required/>
+        <input type="text" id="addressInput" placeholder="endereço" required/>
+        <input type="text" id="obsInput" placeholder="Observação (ex: entregar após as 18h / portaria 2 / troco?)"/>
+
+        <p class="aviso">Selecione o mesmo whatsapp pelo qual você acessou o link.</p>
+        <select id="whatsappSelect" required>
+          <option value="5591989749901">Whatsapp Água Vital 1</option>
+          <option value="5591980161664">Whatsapp Água Vital 2</option>
+        </select>
+
+        <a href="http://link.mercadopago.com.br/depositoaguavital" target="_blank" class="btn-pagamento" style="display:block; margin:12px 0; text-align:center; background:#075c9f; color:#ffffff; padding:10px; border-radius:6px; font-weight:bold; text-decoration:none;"> 💳 Pagar agora </a>
+
+        <p style="text-align:center; margin-bottom:16px; color:#000000; font-weight:bold;">
+          ⚠️Atenção: Inclua no pagamento o valor referente à sua compra, envie o comprovante para o nosso WhatsApp e finalize o pedido.
+        </p>
+        <button id="checkoutBtn" type="button">Finalizar Pedido</button>
+        <p style="text-align:center; color:#000000; font-weight:bold; margin-bottom:10px;">
+          ⚠️Atenção: Após clicar em "Finalizar Pedido", não esqueça de anexar/enviar o PDF gerado junto com sua mensagem ao WhatsApp!
+        </p>
+      </div>
+    </div>
+
+    <!-- Carrossel -->
+    <div class="carousel">
+      <div class="carousel-track">
+        <img src="anuncios/Agua.png" alt="Imagem 1">
+        <img src="anuncios/Gás.png" alt="Imagem 2">
+        <img src="anuncios/beber.png" alt="Imagem 3">
+      </div>
+      <div class="carousel-dots">
+        <span class="dot active"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+    </div>
+  </main>
+
+  <!-- ...existing code... -->
+
+<!-- Modal do histórico -->
+<div id="historicoModal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.5); z-index:1000;">
+  <div style="background:#fff; margin:40px auto; padding:20px; max-width:600px; border-radius:8px; position:relative;">
+    <button onclick="fecharHistorico()" style="position:absolute; top:10px; right:10px;">Fechar</button>
+    <h2>Histórico de Pedidos</h2>
+    <input type="password" id="senhaHistorico" placeholder="Digite a senha" />
+    <button onclick="verHistorico()">📊 Ver Histórico</button>
+    <div id="tabelaHistorico" style="margin-top:20px;"></div>
+  </div>
+</div>
+
+<!-- Botão para abrir o histórico -->
+<!-- Botão para abrir o histórico centralizado -->
+<div style="width:100%; display:flex; justify-content:center; margin-top:24px;">
+  <button class="btn-historico" onclick="abrirHistorico()">📊 Histórico</button>
+</div>
+
+  <!-- Localização e Horário -->
+  <p style="text-align: center; margin-top: 20px;">
+    Estamos localizados na <strong>Av. Gov. Hélio da Mota Gueiros, nº 149 - Quarenta Horas, Ananideua - PA</strong> <br>
+    <a href="https://maps.app.goo.gl/ZEjxTy5XVugvu4F77" target="_blank" style="text-decoration: none;">📍 Ver no Google Maps</a>
+  </p>
+
+  <p style="text-align: center;">
+    Horário: Segunda a Sábado 7:30h às 20:00h | Domingo 7:30h às 14:00h
+  </p>
+
+  <footer style="text-align:center; padding:20px; background:#000000; color:white;">
+    <div>Siga a Vital Água nas redes sociais:</div>
+    <a href="https://www.instagram.com/agua.vital.2014" target="_blank" style="margin:0 10px; color:rgb(0, 4, 255); text-decoration:none;">
+      <img src="logo redes sociais/instagram" alt="Instagram" style="height:32px; vertical-align:middle;"> Instagram
+    </a>
+    <a href="https://wa.me/5591989749901" target="_blank" style="margin:0 10px; color:rgb(0, 38, 255); text-decoration:none;">
+      <img src="logo redes sociais/whats.jpg" alt="WhatsApp" style="height:32px; vertical-align:middle;"> WhatsApp
+    </a>
+    <div>&copy; 2025 Vital Água. Todos os direitos reservados.</div>
+  </footer>
+
+  <!-- Carregue o JS no final do body para garantir que todos os elementos existem -->
+  <script src="script.js"></script>
+</body>
+</html>
