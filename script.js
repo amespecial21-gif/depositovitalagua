@@ -236,7 +236,14 @@ cart.forEach(item => {
         quantidade: item.quantity,
         valorUnitario: (item.totalPrice / item.quantity).toFixed(2),
         valorTotal: item.totalPrice.toFixed(2),
-        data: new Date().toLocaleString('pt-BR', { weekday: 'short', day: '2-digit', month: '2-digit', year: '2-digit', hour: '2-digit', minute: '2-digit' })
+        dataTexto: new Date().toLocaleString('pt-BR', {
+          weekday: 'short',
+          day: '2-digit',
+          month: '2-digit',
+          year: '2-digit',
+          hour: '2-digit',
+          minute: '2-digit'
+        }).toString()
       }]
     })
   });
@@ -302,18 +309,19 @@ window.verHistorico = function() {
         return;
       }
       let html = '<table border="1"><tr><th>Data</th><th>Produto</th><th>Quantidade</th><th>Valor Unitário</th><th>Valor Total</th></tr>';
-      data.forEach(row => {
-        html += `<tr>
-          <td>${row.data || ''}</td>
-          <td>${row.produto || ''}</td>
-          <td>${row.quantidade || ''}</td>
-          <td>${row.valorUnitario || ''}</td>
-          <td>${row.valorTotal || ''}</td>
-        </tr>`;
-      });
-      html += '</table>';
+data.forEach(row => {
+  html += `<tr>
+    <td>${row.dataTexto || ''}</td>
+    <td>${row.produto || ''}</td>
+    <td>${row.quantidade || ''}</td>
+    <td>${row.valorUnitario || ''}</td>
+    <td>${row.valorTotal || ''}</td>
+  </tr>`;
+});
+html += '</table>';
       document.getElementById('tabelaHistorico').innerHTML = html;
     });
 }
+
 
 
