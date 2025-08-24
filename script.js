@@ -323,5 +323,27 @@ html += '</table>';
     });
 }
 
+         // Mostra/oculta o bloco Pix ao clicar no botão Pix
+document.getElementById('btnPix').addEventListener('click', function() {
+  var pixDiv = document.getElementById('pixInfo');
+  pixDiv.style.display = (pixDiv.style.display === 'none' || pixDiv.style.display === '') ? 'block' : 'none';
+});
+
+// Função copiar
+function copiarTexto(id) {
+  const input = document.getElementById(id);
+  input.select();
+  input.setSelectionRange(0, 99999); // Para mobile
+  document.execCommand('copy');
+}
+
+// Quando fechar o carrinho, também esconde o bloco Pix
+document.querySelector('#cartModal .close').addEventListener('click', function() {
+  document.getElementById('cartModal').style.display = 'none';
+  document.getElementById('pixInfo').style.display = 'none';
+});
+
+
+
 
 
