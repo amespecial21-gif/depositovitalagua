@@ -138,12 +138,13 @@
 </div>
 
   <div style="margin-bottom:10px;">
-    <strong>Telefone Pix:</strong><br>
-    <div style="display:flex; justify-content:center; align-items:center; gap:8px; margin-top:4px;">
-      <span id="pix-telefone" style="user-select:all; font-size:0.95em;">(91) 98974-9901</span>
-      <button onclick="copiarTexto('pix-telefone')" style="font-size:0.9em;">📋 Copiar</button>
-    </div>
+  <strong>Telefone Pix:</strong><br>
+  <div style="display:flex; justify-content:center; align-items:center; gap:8px; margin-top:4px;">
+    <input id="pix-telefone" type="text" readonly value="(91) 98974-9901"
+  style="width:130px; height:28px; font-size:0.9em; padding:0 8px; border:1px solid #075c9f; border-radius:4px; background:#f8f8f8; box-sizing:border-box; vertical-align:middle; display:inline-block; position:relative; top:4px;" />
+    <button onclick="copiarTexto('pix-telefone')" style="font-size:0.9em;">📋 Copiar</button>
   </div>
+</div>
 
   <div>
     <strong>Nome do destinatário:</strong><br>
@@ -219,6 +220,7 @@
 </body>
 
 </html>
+
 
 
 
