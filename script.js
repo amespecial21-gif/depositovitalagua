@@ -234,8 +234,8 @@ cart.forEach(item => {
       data: [{
         produto: item.name,
         quantidade: item.quantity,
-        valorUnitario: (item.totalPrice / item.quantity).toFixed(2),
-        valorTotal: item.totalPrice.toFixed(2),
+        valorUnitario: (item.totalPrice / item.quantity).toFixed(2).replace('.', ','),
+        valorTotal: item.totalPrice.toFixed(2).replace('.', ','),
         dataTexto: new Date().toLocaleString('pt-BR', {
           weekday: 'short',
           day: '2-digit',
@@ -342,6 +342,7 @@ document.querySelector('#cartModal .close').addEventListener('click', function()
   document.getElementById('cartModal').style.display = 'none';
   document.getElementById('pixInfo').style.display = 'none';
 });
+
 
 
 
